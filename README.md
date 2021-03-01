@@ -7,7 +7,7 @@ d'une journée.
 
 ## Maquettes du site
 
-La maquette intéractive complète est <a src="https://app.moqups.com/4guPW9bWLx/view/page/a2c0110e6">consultable ici</a>.
+La maquette intéractive complète est <a href="https://app.moqups.com/4guPW9bWLx/view/page/a2c0110e6">consultable ici</a>.
 
 ### Page "Aujourd'hui" (page principale)
 
