@@ -1,4 +1,4 @@
-# Planche-velivole-front
+# Planche velivole (frontend)
 
 Front-end d'un projet consistant à pratiquer le MERN stack.
 Le but est de créer une Single Page Application qui permet de remplacer les planches 
