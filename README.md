@@ -1,4 +1,4 @@
-# Planche velivole (frontend)
+# Planche-velivole-front
 
 Front-end d'un projet consistant à pratiquer le MERN stack.
 Le but est de créer une Single Page Application qui permet de remplacer les planches 
@@ -35,3 +35,8 @@ Lorsque l'on veut avoir accès aux archives, on se rend sur le deuxième onglet 
 
 - Consultation d'une ancienne planche :
 <img src="doc/Maquettes/Autres-planches/Autres planches - consultation.png">
+
+### Page de connexion
+
+<img src="doc/Maquettes/Connexion.png">
+
