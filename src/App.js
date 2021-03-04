@@ -9,6 +9,7 @@ import {
 
 import Planche from "./pages/Planche";
 import Archive from "./pages/Archive";
+import Authentification from "./pages/Authentification";
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
         </Route>
         <Route path="/archive" exact="true">
           <Archive />
+        </Route>
+        <Route path="/authentification" exact="true">
+          <Authentification />
         </Route>
         {/* Si aucune route n'est render, redirect affiche /*/}
         <Redirect to="/" />
