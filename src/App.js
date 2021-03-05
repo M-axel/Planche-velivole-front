@@ -9,12 +9,15 @@ import {
 
 import Planche from "./pages/Planche";
 import Archive from "./pages/Archive";
+import Navigation from "./components/Navigation/Navigation";
 import Authentification from "./pages/Authentification";
 
 const App = () => {
   return (
     <Router>
+      <Navigation />
       {/* A l'interieur d'un switch, une seule Route est render */}
+      <main>
       <Switch>
         {/* Ce qui se trouve dans la balise Route est render
     lorsque l'URL correspond au paramètre 'path' défini.
@@ -31,6 +34,7 @@ const App = () => {
         {/* Si aucune route n'est render, redirect affiche /*/}
         <Redirect to="/" />
       </Switch>
+      </main>
     </Router>
   );
 };
