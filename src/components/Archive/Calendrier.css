@@ -1,0 +1,32 @@
+.Calendrier{
+    margin-top: 2em;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.react-calendar{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.react-calendar__navigation button{
+    border:0px;
+    padding:1em;
+    font-size: 20px;
+}
+.react-calendar__viewContainer{
+    margin-top:1em;
+}
+.eact-calendar__month-view__weekdays__weekday abbr{
+    color:red;
+    border-bottom: none;
+}
+.react-calendar__month-view__days{
+    margin-top: 1em;
+}
+
+.react-calendar__month-view__days button{
+    border:1px solid lightgreen;
+    padding: 2em;
+}

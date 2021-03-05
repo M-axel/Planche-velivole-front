@@ -1,6 +1,6 @@
 import React from "react";
 
-import Tableau from "../components/Tableau";
+import Tableau from "../components/Planche/Tableau";
 
 const Planche = () => {
   //Dummy

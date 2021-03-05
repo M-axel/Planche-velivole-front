@@ -1,7 +1,13 @@
-import React from 'react';
+import React from "react";
+
+import Calendrier from "../components/Archive/Calendrier";
 
 const Archive = () => {
-    return <h2>Archives</h2>
+  return (
+    <div className="Calendrier">
+      <Calendrier />
+    </div>
+  );
 };
 
 export default Archive;
