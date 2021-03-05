@@ -1,10 +1,21 @@
 .tableau{
-    border: 1px solid black;
+    margin-top: 2em;
+    margin-right: auto;
+    margin-left: auto;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 15px;
 }
 
+/* Entête du tableau */
 .tableau th{
-    border: 1px solid black;
+    padding-left: 4px;
+    padding-right: 4px;
+    background-color: rgb(170, 170, 170);
+    border: 1px solid lightgray;
 }
+
+/* data */
 .tableau td{
-    border: 1px solid black;
+    border: 1px solid lightgray;
 }
