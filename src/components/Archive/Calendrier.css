@@ -19,7 +19,6 @@
     margin-top:1em;
 }
 .eact-calendar__month-view__weekdays__weekday abbr{
-    color:red;
     border-bottom: none;
 }
 .react-calendar__month-view__days{
@@ -27,6 +26,11 @@
 }
 
 .react-calendar__month-view__days button{
-    border:1px solid lightgreen;
+    border:1px solid grey;
     padding: 2em;
+    font-size: 1.2em;
+}
+
+.react-calendar__tile--active{
+    background-color: yellow;
 }

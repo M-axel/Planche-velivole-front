@@ -18,7 +18,7 @@
     color: white;
 }
 
-.header button{
+.header > button{
     /*Pour effacer le css de base qui s'applique aux boutons*/
     background-color: whitesmoke;
     box-shadow: 0 0 0 transparent;
@@ -28,7 +28,7 @@
     border-radius: 10px;
 }
 
-.header button:active, button:focus{
+.header > button:active, .header > button:focus{
     /*Pour effacer le css de base qui s'applique aux boutons*/
     background-color: whitesmoke;
     box-shadow: 0 0 0 transparent;

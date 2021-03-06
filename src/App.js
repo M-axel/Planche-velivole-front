@@ -22,13 +22,13 @@ const App = () => {
         {/* Ce qui se trouve dans la balise Route est render
     lorsque l'URL correspond au paramètre 'path' défini.
     Sans 'exact' /DKJDNK/DJD passerait dans cette route*/}
-        <Route path="/" exact="true">
+        <Route path="/" exact>
           <Planche />
         </Route>
-        <Route path="/archive" exact="true">
+        <Route path="/archive" exact>
           <Archive />
         </Route>
-        <Route path="/authentification" exact="true">
+        <Route path="/authentification" exact>
           <Authentification />
         </Route>
         {/* Si aucune route n'est render, redirect affiche /*/}
