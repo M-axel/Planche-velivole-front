@@ -23,9 +23,12 @@ const App = () => {
     lorsque l'URL correspond au paramètre 'path' défini.
     Sans 'exact' /DKJDNK/DJD passerait dans cette route*/}
         <Route path="/" exact>
-          <Planche />
+          <Planche date={new Date()} />
         </Route>
         <Route path="/archive" exact>
+          <Archive />
+        </Route>
+        <Route path="/archive/:annee/:mois/:jour" exact>
           <Archive />
         </Route>
         <Route path="/authentification" exact>
