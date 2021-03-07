@@ -22,7 +22,7 @@ const Archive = () => {
   const history = useHistory();
   // Il nous faut un état pour savoir si on est en selection de l'archive ou consultation
   // Pour ça on va utiliser useReducer puisque les deux états sont liés
-  const [state, dispatch] = useReducer(reducer, "calendrier");
+  const [state, dispatch] = useReducer(reducer, 'calendrier');
 
   // On recupère ce qui se trouve dans l'url
   const dateULR = {
@@ -30,23 +30,33 @@ const Archive = () => {
     mois: useParams().mois,
     jour: useParams().jour,
   };
+
+  // Si on entre une URL à la main, on tombe directement sur la planche. Pas obligé de passer par le calendrier
+  if(dateULR.annee && dateULR.mois && dateULR.jour && (state === 'calendrier')){
+    dispatch({ type: "affichePlanche" });
+  }
+
+  console.log("Date URL:" + dateULR.annee + "/" + dateULR.mois+"/"+dateULR.jour);
+
   // On converti ça en une date format ISO (ex: 2010-01-27)
   const dateURLISO = new Date(
     dateULR.annee + "-" + dateULR.mois + "-" + dateULR.jour
   );
+  // Attention parce qu'ici, le mois est à nouveau 0 pour janvier
 
-  console.log("Date:" + dateURLISO);
+  console.log("Date ISO :" + dateURLISO);
 
   const clickDayHandler = (date) => {
+    console.log("Calendar envoie : "+date + " soit mois :"+ date.getMonth());
     // Si une date est cliquée sur le calendrier, alors on modifie notre URL
     // et au refresh, cette url sera capturée par useParams() et donc dans dateURL
     history.push(
       "/archive/" +
         date.getFullYear() +
         "/" +
-        date.getMonth() +
+        (date.getMonth() +1) + // +1 car getMonth envoie 0 pour janvier
         "/" +
-        date.getDay()
+        date.getDate()
     );
 
     dispatch({ type: "affichePlanche" });
@@ -65,7 +75,7 @@ const Archive = () => {
     return (
       <React.Fragment>
         <h1 className="titreArchive">
-          Archive du {dateURLISO.getDay()}/{dateURLISO.getMonth()}/
+          Archive du {dateURLISO.getDate()}/{dateURLISO.getMonth() +1}/
           {dateURLISO.getFullYear()}
         </h1>
         <div

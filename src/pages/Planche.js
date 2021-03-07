@@ -36,6 +36,7 @@ const Planche = (props) => {
   // Pour etre certain de travailler uniquement sur YYYY-MM-DD
   plancheID.setHours(0,0,0,0);
 
+  console.log("planche ID:" + plancheID);
   // getTime sinon la comparaison ne se valide jamais
   const plancheAAfficher = VOL.filter( vol => vol.id.getTime() === plancheID.getTime());
 
