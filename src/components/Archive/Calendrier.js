@@ -4,7 +4,6 @@ import Calendar from 'react-calendar';
 import './Calendrier.css';
 
 const Calendrier = props => {
-    
     return (
         <Calendar
         onClickDay={props.callback} // Si déclanché, on rappelle le component parent

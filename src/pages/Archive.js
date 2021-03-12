@@ -36,18 +36,19 @@ const Archive = () => {
     dispatch({ type: "affichePlanche" });
   }
 
-  console.log("Date URL:" + dateULR.annee + "/" + dateULR.mois+"/"+dateULR.jour);
+  //console.log("Date URL:" + dateULR.annee + "/" + dateULR.mois+"/"+dateULR.jour);
 
-  // On converti ça en une date format ISO (ex: 2010-01-27)
-  const dateURLISO = new Date(
-    dateULR.annee + "-" + dateULR.mois + "-" + dateULR.jour
+  // On converti ça en une date format ISO (ex: 2010,01,27)
+  let dateURLISO = new Date(
+    dateULR.annee, dateULR.mois -1, + dateULR.jour
   );
   // Attention parce qu'ici, le mois est à nouveau 0 pour janvier
 
-  console.log("Date ISO :" + dateURLISO);
+  //console.log("Date ISO :" + dateURLISO);
 
   const clickDayHandler = (date) => {
-    console.log("Calendar envoie : "+date + " soit mois :"+ date.getMonth());
+    //console.log("Calendar envoie : "+date + " soit mois :"+ date.getMonth());
+    
     // Si une date est cliquée sur le calendrier, alors on modifie notre URL
     // et au refresh, cette url sera capturée par useParams() et donc dans dateURL
     history.push(
@@ -75,7 +76,7 @@ const Archive = () => {
     return (
       <React.Fragment>
         <h1 className="titreArchive">
-          Archive du {dateURLISO.getDate()}/{dateURLISO.getMonth() +1}/
+          Archive du {dateURLISO.getDate()}/{dateURLISO.getMonth()+1}/
           {dateURLISO.getFullYear()}
         </h1>
         <div
