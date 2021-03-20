@@ -1,16 +1,14 @@
 import React from "react";
 
 import Ligne from "./Ligne";
+import Form from "../Planche/Form/Form";
 import "./Tableau.css";
 
 const Tableau = (props) => {
-  // Si le tableau n'a pas de ligne
-  if (props.planche.length === 0) {
-    return <h2>Il n'y a pas encore de ligne aujourd'hui.</h2>;
-  }
-
+  
   return (
-    <table className="tableau">
+    <React.Fragment>
+    <table id="tableau" className="tableau">
       <tbody>
         <tr>
           <th colSpan="3" scope="colgroup">
@@ -60,7 +58,7 @@ const Tableau = (props) => {
         {
           props.planche.data.map( ligne => {
             return (<Ligne
-              id={ligne.id}
+              key={ligne.volID}
               immatAvion={ligne.avion.immat}
               nomPiloteAvion={ligne.avion.pilote}
               codePiloteAvion={ligne.avion.code}
@@ -80,8 +78,12 @@ const Tableau = (props) => {
             />)
           })
         }
+        {/* Je passe en propriété la méthode addLigne de la classe "Planche" */}
+        <Form action="ajouter" addLigne={props.addLigne} />
+        
       </tbody>
     </table>
+    </React.Fragment>
   );
 };
 

@@ -1,20 +1,21 @@
 import React from "react";
 
 import Tableau from "../components/Planche/Tableau";
+import Controls from "../components/Planche/Form/Controls";
 
-const Planche = props => {
-
+const Planche = (props) => {
   if (props.length === 0) {
     window.alert("On veut afficher une planche sans sa date");
-  } else if(props.length > 1){
+  } else if (props.length > 1) {
     window.alert("Trop de planches données en props");
   }
 
   //console.log("Date dans planche" + props.date)
+
   //Dummy
   const DUMMY_DATA = [
     {
-      plancheID: new Date(2021,0,1),
+      plancheID: new Date(2021, 0, 1),
       data: [
         {
           volID: "1",
@@ -39,7 +40,7 @@ const Planche = props => {
       ],
     },
     {
-      plancheID: new Date(2021,0,2),
+      plancheID: new Date(2021, 0, 2),
       data: [
         {
           volID: "3",
@@ -64,7 +65,7 @@ const Planche = props => {
       ],
     },
     {
-      plancheID: new Date(2021,2,12),
+      plancheID: new Date(2021, 2, 15),
       data: [
         {
           volID: "5",
@@ -87,8 +88,22 @@ const Planche = props => {
           parachute: "22",
         },
       ],
-    }
+    },
   ];
+
+  /**
+   * Méthode pour ajouter une ligne à la base de donnée
+   * @param {*} plancheID (au format Date dont heure, minute et seconde à 0)
+   * @param {*} ligne
+   */
+  const addLigne = (plancheID, ligne) => {
+    this.DUMMY_DATA.plancheID = plancheID;
+
+    // On rajoute l'objet dans l'array "data"
+    this.DUMMY_DATA.plancheID.push(ligne);
+  };
+
+  //this.addLigne = this.addLigne.bind(this);
 
   // La planche à afficher (car id = date)
   const plancheID = props.date;
@@ -99,14 +114,29 @@ const Planche = props => {
 
   // On va itérer sur les données à la recherche de la bonne planche
   // getTime sinon la comparaison ne se valide jamais
+
   const plancheAAfficher = DUMMY_DATA.filter(
-    planche => planche.plancheID.getTime() === plancheID.getTime()
+    (planche) => planche.plancheID.getTime() === plancheID.getTime()
   );
 
   //console.log(plancheAAfficher[0].plancheID);
-    // plancheAAfficher est un array dont la taille est forcément de 1
-    // (une seule planche par date)
-  return <Tableau planche={plancheAAfficher[0]} />;
+  // plancheAAfficher est un array dont la taille est forcément de 1
+  // (une seule planche par date)
+
+  // Pour ne pas afficher un tableau qui n'existe pas
+  if (plancheAAfficher.length === 0) {
+    return <h2>Il n'y a pas encore de ligne aujourd'hui.</h2>;
+  } else {
+    // Je passe addLigne (méthode) au tableau, puis au form
+    // this.addLigne et pas juste la méthode car on veut pouvoir modifier ce composant
+    // on va donc bind
+    return (
+      <React.Fragment>
+        <Controls />
+        <Tableau planche={plancheAAfficher[0]} addLigne={addLigne} />
+      </React.Fragment>
+    );
+  }
 };
 
 export default Planche;

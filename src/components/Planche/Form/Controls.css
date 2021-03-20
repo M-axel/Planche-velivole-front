@@ -1,0 +1,14 @@
+#controlStrip {
+    margin-top: 1em;
+  margin-left: 3em;
+  display: flex;
+  align-items: center;
+  height: 3em;
+  width: 500px;
+}
+
+#controlStrip img {
+    padding-left: 1em;
+    padding-right: 1em;
+  height: 2.5em;
+}
