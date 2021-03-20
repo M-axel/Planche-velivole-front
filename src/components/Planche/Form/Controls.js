@@ -9,6 +9,7 @@ const Controls = (props) => {
         <img
           src={window.location.origin + "/images/Plus.png"}
           alt="Ajouter une ligne"
+          onClick={() => props.dispatch({type: 'ajouter'})}
         />
         <div>Modifier</div>
         <img

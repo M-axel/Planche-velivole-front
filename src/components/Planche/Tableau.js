@@ -5,7 +5,14 @@ import Form from "../Planche/Form/Form";
 import "./Tableau.css";
 
 const Tableau = (props) => {
-  
+
+  let form = '';
+
+  if (props.state === 'ajouter'){
+    /* Je passe en propriété la méthode addLigne de la classe "Planche" */
+    form = <Form action={props.state} addLigne={props.addLigne} dispatch={props.dispatch}/>
+  }
+
   return (
     <React.Fragment>
     <table id="tableau" className="tableau">
@@ -78,9 +85,7 @@ const Tableau = (props) => {
             />)
           })
         }
-        {/* Je passe en propriété la méthode addLigne de la classe "Planche" */}
-        <Form action="ajouter" addLigne={props.addLigne} />
-        
+        {form}
       </tbody>
     </table>
     </React.Fragment>

@@ -5,7 +5,7 @@ import './Form.css';
 import '../Tableau.css';
 
 // On aura besoin d'un tunel pour généré le form de modification au milieu du tableau
-const Form = props => {
+const Form = (props) => {
     // Props : 'ajouter' ou 'modifier'
     const action = props.action;
 
@@ -62,7 +62,7 @@ const Form = props => {
             <input type="text" name="name" id="numeroParachute" />
         </td>
     </tr>
-    <SubmitButton addLigne = {props.addLigne} />
+    <SubmitButton addLigne = {props.addLigne} dispatch={props.dispatch} />
     </React.Fragment>
     
     );

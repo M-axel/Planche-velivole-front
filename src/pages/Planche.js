@@ -1,7 +1,24 @@
-import React from "react";
+import React,{ useReducer } from "react";
 
 import Tableau from "../components/Planche/Tableau";
 import Controls from "../components/Planche/Form/Controls";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'consultation':
+      state = 'consultation';
+      return state;
+    case 'ajouter':
+      state = 'ajouter';
+      console.log('On ajoute');
+      return state;
+    case 'modifier':
+      state = 'modifier';
+      return state;
+    default:
+      return state; // On retourne l'état actuel
+  }
+};
 
 const Planche = (props) => {
   if (props.length === 0) {
@@ -11,6 +28,9 @@ const Planche = (props) => {
   }
 
   //console.log("Date dans planche" + props.date)
+
+  // On utilise un etat : consultation, ajout ou modification
+  const [state, dispatch] = useReducer(reducer, 'consultation');
 
   //Dummy
   const DUMMY_DATA = [
@@ -132,8 +152,9 @@ const Planche = (props) => {
     // on va donc bind
     return (
       <React.Fragment>
-        <Controls />
-        <Tableau planche={plancheAAfficher[0]} addLigne={addLigne} />
+        {/** Je donne la fonction dispatch au controls pour qu'il puisse changer le state */}
+        <Controls state={state} dispatch={dispatch} />
+        <Tableau planche={plancheAAfficher[0]} addLigne={addLigne} state={state} dispatch={dispatch}/>
       </React.Fragment>
     );
   }

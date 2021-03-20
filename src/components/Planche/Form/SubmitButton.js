@@ -5,7 +5,7 @@ import "./SubmitButton.css";
 
 const SubmitButton = (props) => {
 
-  const submitHandler = (props) => {
+  const submitHandler = () => {
     console.log("Nouvelle ligne");
 
     // Je n'ai pas utilisé de balise <form>, je récupère donc la valeur avec l'id de la case input
@@ -41,7 +41,7 @@ const SubmitButton = (props) => {
       parachute: document.getElementById("numeroParachute").value,
     };
 
-    console.log(ligne.avion.immat, ligne.avion.pilote, ligne.avion.code);
+    //console.log(ligne.avion.immat, ligne.avion.pilote, ligne.avion.code);
 
     /* Puis on ajoute notre ligne à notre base de donnée.
     * Pour ce faire, on utilise la méthode que Planche.js nous a donnée
@@ -49,12 +49,13 @@ const SubmitButton = (props) => {
 
     //TODO:
 
-    props.addLigne('test', 'test');
+    //props.addLigne('test', 'test');
 
+    props.dispatch({type: 'consultation'});
   };
 
 
-  const submitButton = <button onClick={submitHandler}>Submit</button>;
+  const submitButton = <button onClick={submitHandler} >Submit</button>;
 
   // Je ne veux pas que le bouton soit render dans mon table puisque ce n'est pas autorisé
   // Il faut donc lui indiquer un autre élément (DOM) auquel se grefer.
