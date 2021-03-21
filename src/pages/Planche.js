@@ -38,7 +38,7 @@ const Planche = (props) => {
       plancheID: new Date(2021, 0, 1),
       data: [
         {
-          volID: "1",
+          volID: "0",
           avion: { immat: "ZV", pilote: "LRC", code: "3208" },
           planeur: { type: "LS6", immat1: "D", immat2: "G" },
           pilotePlaneur: { nom: "DEWEZ", code: "544" },
@@ -48,7 +48,7 @@ const Planche = (props) => {
           parachute: "22",
         },
         {
-          volID: "2",
+          volID: "1",
           avion: { immat: "ZM", pilote: "LRC", code: "3208" },
           planeur: { type: "LS6", immat1: "D", immat2: "G" },
           pilotePlaneur: { nom: "DEWEZ", code: "544" },
@@ -63,7 +63,7 @@ const Planche = (props) => {
       plancheID: new Date(2021, 0, 2),
       data: [
         {
-          volID: "3",
+          volID: "0",
           avion: { immat: "ZV", pilote: "LRC", code: "3208" },
           planeur: { type: "LS6", immat1: "D", immat2: "G" },
           pilotePlaneur: { nom: "DEWEZ", code: "544" },
@@ -73,7 +73,7 @@ const Planche = (props) => {
           parachute: "22",
         },
         {
-          volID: "4",
+          volID: "1",
           avion: { immat: "ZV", pilote: "LRC", code: "3208" },
           planeur: { type: "LS6", immat1: "D", immat2: "G" },
           pilotePlaneur: { nom: "MAISSA", code: "544" },
@@ -88,7 +88,7 @@ const Planche = (props) => {
       plancheID: new Date(2021, 2, 15),
       data: [
         {
-          volID: "5",
+          volID: "0",
           avion: { immat: "ZV", pilote: "LRC", code: "3208" },
           planeur: { type: "LS6", immat1: "D", immat2: "G" },
           pilotePlaneur: { nom: "DEWEZ", code: "544" },
@@ -98,7 +98,7 @@ const Planche = (props) => {
           parachute: "22",
         },
         {
-          volID: "6",
+          volID: "1",
           avion: { immat: "ZV", pilote: "LRC", code: "3208" },
           planeur: { type: "LS6", immat1: "D", immat2: "G" },
           pilotePlaneur: { nom: "DEWEZ", code: "544" },
@@ -117,12 +117,31 @@ const Planche = (props) => {
    * @param {*} ligne
    */
   const addLigne = (plancheID, ligne) => {
-    this.DUMMY_DATA.plancheID = plancheID;
 
-    // On rajoute l'objet dans l'array "data"
-    this.DUMMY_DATA.plancheID.push(ligne);
+    const plancheAModifier = DUMMY_DATA.find( planche => planche.plancheID.getTime() === plancheID.getTime());
+
+    // On part du principe qu'une planche existe déjà
+    if(plancheAModifier){
+
+    const previousLen = plancheAModifier.data.length;
+
+    // L'id donné par SubmitButton est "-1", on lui donne donc un nouvel id qui n'existe pas encore
+    // basé sur la longueur de la planche du jour (indice donc part de 0, pas besoin de +1 puisque j'ai recupéré la length)
+    ligne.volID = previousLen + '';
+
+    // On rajoute l'objet dans l'array "data" pour le moment => ça n'aura aucun effet (attendre le backend)
+    const newLen = plancheAModifier.data.push(ligne);
+
+    // TODO : intégration backend
+
+    if(newLen ===! (previousLen+1)){
+      console.log('Pas normal, ligne mal insérée');
+    }
+
+    } else {console.log("La planche dans laquelle vous souhaitez ajouter une ligne n'existe pas encore");}
+
+    console.log(DUMMY_DATA.find( planche => planche.plancheID.getTime() === plancheID.getTime()));
   };
-
   //this.addLigne = this.addLigne.bind(this);
 
   // La planche à afficher (car id = date)

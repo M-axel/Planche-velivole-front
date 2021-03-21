@@ -10,7 +10,7 @@ const SubmitButton = (props) => {
 
     // Je n'ai pas utilisé de balise <form>, je récupère donc la valeur avec l'id de la case input
     const ligne = {
-      volID: "1",
+      volID: "-1",
       avion: {
         immat: document.getElementById("immatAvion").value,
         pilote: document.getElementById("nomPiloteAvion").value,
@@ -49,7 +49,7 @@ const SubmitButton = (props) => {
 
     //TODO:
 
-    //props.addLigne('test', 'test');
+    props.addLigne(new Date(2021, 2, 15), ligne);
 
     props.dispatch({type: 'consultation'});
   };
