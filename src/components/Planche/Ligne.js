@@ -4,8 +4,14 @@ import React from "react";
 import "./Ligne.css";
 
 const Ligne = (props) => {
+
+  const clickHandler = () => {
+    props.selectLigne(props.id);
+  };
+
   return (
-    <tr className="ligne">
+    // onClick => on veut "select" la ligne pour pouvoir la modifier/supprimer
+    <tr id={props.id} className="ligne" onClick={clickHandler}>
         <td>{props.immatAvion}</td>
         <td>{props.nomPiloteAvion}</td>
         <td>{props.codePiloteAvion}</td>

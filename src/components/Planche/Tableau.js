@@ -5,6 +5,7 @@ import Form from "../Planche/Form/Form";
 import "./Tableau.css";
 
 const Tableau = (props) => {
+
   let form;
 
   if (props.state === "ajouter") {
@@ -86,6 +87,11 @@ const Tableau = (props) => {
                 atterrissageHeurePlaneur={ligne.atterrissage.heure}
                 atterrissageMinutePlaneur={ligne.atterrissage.minute}
                 numeroParachute={ligne.parachute}
+
+                id={ligne.volID}
+                modifieLigne={props.modifieLigne}
+                selectLigne={props.selectLigne}
+                planche={props.planche}
               />
             );
           })}

@@ -49,7 +49,7 @@ const SubmitButton = (props) => {
 
     //TODO:
 
-    props.addLigne(new Date(2021, 2, 15), ligne);
+    props.addLigne(ligne);
 
     props.dispatch({type: 'consultation'});
   };
