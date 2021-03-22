@@ -10,7 +10,7 @@ const Controls = (props) => {
   onClick={() => props.dispatch({type: 'ajouter'})}
 />
 
-let boutonModifier = <button id="bouton-modifier"
+const boutonModifier = <button id="bouton-modifier"
 onClick={() => props.dispatch({type: 'modifier'})}
 disabled={props.state === 'selection' ? false : true } >Modifier</button>
 

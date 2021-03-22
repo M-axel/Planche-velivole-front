@@ -8,12 +8,15 @@ const Tableau = (props) => {
 
   let form;
 
-  if (props.state === "ajouter") {
+  if (props.state === "ajouter"|| props.state==="modifier") {
     /* Je passe en propriété la méthode addLigne de la classe "Planche" */
     form = (
       <Form
+        key={props.state}
         action={props.state}
         addLigne={props.addLigne}
+        modifieLigne={props.modifieLigne}
+        selectedLine={props.selectedLine}
         dispatch={props.dispatch}
       />
     );
@@ -68,6 +71,10 @@ const Tableau = (props) => {
           </tr>
           {/* On affiche pour toutes les lignes reçues par props (une ligne = un ligne) */}
           {props.planche.data.map((ligne) => {
+            if(props.state === 'modifier' && ligne.volID === props.selectedLine.volID){
+              return form;
+            }
+            else {
             return (
               <Ligne
                 key={ligne.volID}
@@ -93,9 +100,10 @@ const Tableau = (props) => {
                 selectLigne={props.selectLigne}
                 planche={props.planche}
               />
-            );
+            );}
           })}
-          {form}
+          {/** Si on doit ajouter une ligne, on render le form à la fin du tableau */}
+          {props.state === 'ajouter' ? form : null}
         </tbody>
       </table>
     </React.Fragment>

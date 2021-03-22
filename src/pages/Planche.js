@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useState, useReducer } from "react";
 
 import Tableau from "../components/Planche/Tableau";
 import Controls from "../components/Planche/Form/Controls";
@@ -17,6 +17,7 @@ const reducer = (state, action) => {
       return state;
     case "modifier":
       state = "modifier";
+      console.log("On modifie");
       return state;
     default:
       return state; // On retourne l'état actuel
@@ -34,6 +35,8 @@ const Planche = (props) => {
 
   // On utilise un etat : consultation, ajout ou modification
   const [state, dispatch] = useReducer(reducer, "consultation");
+  // SelectedLine va contenir un objet {volID:'..', ...}
+  const[selectedLine, setSelectedLine] = useState(null);
 
   //Dummy
   const DUMMY_DATA = [
@@ -157,21 +160,22 @@ const Planche = (props) => {
 
   /********************** SELECTION DE LIGNE ***********************/
 
-  let selectedLigne;
-
   /**
    * Fonction appellée par un component Ligne lorsque onClick est déclenché
    * @param {*} key 
    */
   const selectLigne = (key) => {
-    console.log('Selected key : '+key);
-    // On change la varibale globale
-    selectedLigne = key;
+    // on trouve la ligne dans la planche actuelle
+    const ligne = plancheAAfficher.data.find(
+      (ligne) => ligne.volID === key
+      );
+      console.log("ligne à modifier : "+ ligne);
+    // On change l'état
+    setSelectedLine(ligne);
 
     // On enleve le css de la précédente selectedLigne :
     const previousSelection = document.getElementsByClassName('ligne selected');
     if(previousSelection[0]){previousSelection[0].classList.remove('selected');}
-    
 
     const ligneDOM = document.getElementById(key);
     ligneDOM.className += ' selected';
@@ -189,14 +193,14 @@ const Planche = (props) => {
    * @param {*} ligne 
    */
   const modifieLigne = (ligne) => {
-    const plancheAModifier = DUMMY_DATA.find(
-      // plancheAAfficher et la planche actuelle (on ne va pas modifier une planche que l'on a pas sous les yeux)
-      (planche) => plancheAAfficher.plancheID.getTime() === plancheID.getTime()
-    );
+    if (plancheAAfficher) {
+      // l'argument "ligne" avec un volID à "-1", on le change avec celui de la bonne ligne
+      ligne.volID = selectedLine;
 
-    if (plancheAModifier) {
-      //TODO
-    }
+      // On peut directement push car la nouvelle ligne ayant le même id que l'ancienne, elle l'overwrite
+      // TODO : vérifier que ça marche
+      plancheAAfficher.data.push(ligne);
+    }else{console.log("Aucune planche modifiable pour le moment");}
   };
 
   /********************** AFFICHAGE ***********************/
@@ -235,6 +239,7 @@ const Planche = (props) => {
           addLigne={addLigne}
           modifieLigne={modifieLigne}
           selectLigne= {selectLigne}
+          selectedLine={selectedLine}
           state={state}
           dispatch={dispatch}
         />
