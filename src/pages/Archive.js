@@ -90,8 +90,8 @@ const Archive = () => {
         </button>
         </Link>
         </div>
-        {/** On passe la date en props à Planche */}
-        <Planche date={dateURLISO} />
+        {/** On passe la date en props à Planche*/}
+        <Planche date={dateURLISO} archive={true} />
       </React.Fragment>
     );
   }

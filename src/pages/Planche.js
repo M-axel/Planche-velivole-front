@@ -195,7 +195,7 @@ const Planche = (props) => {
     const ligne = plancheAAfficher.data.find(
       (ligne) => ligne.volID === key
       );
-      console.log("ligne à modifier : "+ ligne);
+      //console.log("Ligne sélectionnée : "+ ligne);
     // On change l'état
     setSelectedLine(ligne);
 
@@ -219,6 +219,8 @@ const Planche = (props) => {
    * @param {*} ligne 
    */
   const modifieLigne = (ligne) => {
+    /*console.log("modifieLigne recoit : "+ligne.avion.immat);
+    console.log("Ligne à modifier : "+ selectedLine.volID);*/
     if (plancheAAfficher) {
       // l'argument "ligne" avec un volID à "-1", on le change avec celui de la bonne ligne
       ligne.volID = selectedLine;
@@ -228,6 +230,19 @@ const Planche = (props) => {
       plancheAAfficher.data.push(ligne);
     }else{console.log("Aucune planche modifiable pour le moment");}
   };
+  /********************** SUPPRESSION ***********************/
+
+  const supprimeLigne = () => {
+    console.log("On supprime ligne id : " + selectedLine);
+
+    // ça parait inutile mais je veux etre certain de prendre à partir de DUMMY_DATA et pas plancheAAfficher
+    const planche = DUMMY_DATA[DUMMY_DATA.indexOf(plancheAAfficher)];
+    const positionLigne = planche.data.indexOf(selectedLine);
+
+    planche.data.slice(positionLigne, positionLigne+1);
+
+    // TODO : envoyer l'action au backend
+  }
 
   /********************** AFFICHAGE ***********************/
 
@@ -258,8 +273,10 @@ const Planche = (props) => {
     // on va donc bind
     return (
       <React.Fragment>
-        {/** Je donne la fonction dispatch au controls pour qu'il puisse changer le state */}
-        <Controls state={state} dispatch={dispatch} />
+        {/** Je donne la fonction dispatch au controls pour qu'il puisse changer le state 
+         * props.archive => si true (donc généré par archive) on ne veut pas pouvoir modifier, ajouter, supprimer
+        */}
+        { props.archive ? null : <Controls state={state} dispatch={dispatch} supprimeLigne={supprimeLigne} />}
         <Tableau
           planche={plancheAAfficher}
           addLigne={addLigne}

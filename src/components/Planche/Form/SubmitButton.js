@@ -3,10 +3,15 @@ import ReactDOM from "react-dom"; // Pour le portal
 
 import "./SubmitButton.css";
 
+/**
+ * 
+ * @param {*} props action, addLigne, modifieLigne, dispatch
+ * @returns 
+ */
 const SubmitButton = (props) => {
 
   const submitHandler = () => {
-    console.log("Nouvelle ligne");
+    //console.log("Nouvelle ligne");
 
     // Je n'ai pas utilisé de balise <form>, je récupère donc la valeur avec l'id de la case input
     const ligne = {
@@ -47,9 +52,11 @@ const SubmitButton = (props) => {
     * Pour ce faire, on utilise la méthode que Planche.js nous a donnée
     */
 
-    //TODO:
-
-    props.addLigne(ligne);
+    if(props.action === 'ajouter'){
+      props.addLigne(ligne);
+    } else if(props.action === 'modifier'){
+      props.modifieLigne(ligne);
+    }
 
     props.dispatch({type: 'consultation'});
   };

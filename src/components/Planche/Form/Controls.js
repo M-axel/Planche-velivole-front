@@ -19,18 +19,19 @@ disabled={props.state === 'selection' ? false : true } >Modifier</button>
 const boutonSupprimer = <img id="bouton-supprimer"
 src={window.location.origin + "/images/Moins.png"}
 alt="Supprimer une ligne"
+// On ne va pas changer d'état, simplement appeller la méthode de suppression dans Planche.js
+// (sans paramètre puique c'est Planche.js qui sait qu'elle ligne elle doit supprimer)
+onClick={() => props.supprimeLigne()}
 // pareil que pour bouton modifier, mais en css
 className={props.state === 'selection' ? null : "disabled"}
 />
 
   return (
-    <React.Fragment>
       <div id="controlStrip">
         {boutonAjouter}
         {boutonModifier}
         {boutonSupprimer}
       </div>
-    </React.Fragment>
   );
 };
 
