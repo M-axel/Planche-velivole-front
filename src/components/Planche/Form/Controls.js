@@ -12,12 +12,15 @@ const Controls = (props) => {
 
 const boutonModifier = <button id="bouton-modifier"
 onClick={() => props.dispatch({type: 'modifier'})}
+// Si mon état n'est pas selection, je ne veux pas pouvoir cliquer sur le bouton
 disabled={props.state === 'selection' ? false : true } >Modifier</button>
 
 
 const boutonSupprimer = <img id="bouton-supprimer"
 src={window.location.origin + "/images/Moins.png"}
 alt="Supprimer une ligne"
+// pareil que pour bouton modifier, mais en css
+className={props.state === 'selection' ? null : "disabled"}
 />
 
   return (

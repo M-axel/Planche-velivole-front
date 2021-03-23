@@ -17,3 +17,11 @@
   padding: 1em;
   background-color: lightgrey;
 }
+
+#controlStrip .disabled {
+  filter: brightness(50%);
+}
+
+#controlStrip img:active{
+  filter: opacity(50%);
+}
