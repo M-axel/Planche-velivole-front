@@ -10,6 +10,9 @@ que l'on trouve dans les aéroclubs vélivoles, planches sur lequelles on inscri
 d'une journée (document qui permet, ulterieurement, la facturation en fonction du temps de remorquage
 et le temps passé dans la cellule du planeur).
 
+Voici la planche en question :
+<img src="doc/Planche_référence.jpeg" alt="Planche de référence" >
+
 ## Maquettes du site
 
 La maquette intéractive complète est <a href="https://app.moqups.com/4guPW9bWLx/view/page/a2c0110e6">consultable ici</a>.
