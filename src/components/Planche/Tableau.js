@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Ligne from "./Ligne";
 import Form from "../Planche/Form/Form";
@@ -71,13 +71,13 @@ const Tableau = (props) => {
           </tr>
           {/* On affiche pour toutes les lignes reçues par props (une ligne = un ligne) */}
           {props.planche.data.map((ligne) => {
-            if(props.state === 'modifier' && ligne.volID === props.selectedLine.volID){
+            if(props.state === 'modifier' && ligne.id === props.selectedLine.id){
               return form;
             }
             else {
             return (
               <Ligne
-                key={ligne.volID}
+                key={ligne.id}
                 immatAvion={ligne.avion.immat}
                 nomPiloteAvion={ligne.avion.pilote}
                 codePiloteAvion={ligne.avion.code}
@@ -95,7 +95,7 @@ const Tableau = (props) => {
                 atterrissageMinutePlaneur={ligne.atterrissage.minute}
                 numeroParachute={ligne.parachute}
 
-                id={ligne.volID}
+                id={ligne.id}
                 modifieLigne={props.modifieLigne}
                 selectLigne={props.selectLigne}
                 planche={props.planche}
