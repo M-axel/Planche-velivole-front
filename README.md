@@ -3,7 +3,7 @@
 Front-end d'un projet consistant à pratiquer le MERN stack. L'accent ne sera pas mis sur 
 la gestion du projet (pas de découpage en itérations par exemple), ni sur le fait de
 créer quelque chose de réelement pertinent mais bien de travailler les concepts de React,
-Node + Express et MongoDB.
+Node + ~~Express~~ Fastify et MongoDB.
 
 Le but est de créer une Single Page Application qui permet de remplacer les planches 
 que l'on trouve dans les aéroclubs vélivoles, planches sur lequelles on inscrit tous les vols
