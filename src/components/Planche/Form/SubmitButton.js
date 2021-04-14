@@ -15,7 +15,6 @@ const SubmitButton = (props) => {
 
     // Je n'ai pas utilisé de balise <form>, je récupère donc la valeur avec l'id de la case input
     const ligne = {
-      volID: "-1",
       avion: {
         immat: document.getElementById("immatAvion").value,
         pilote: document.getElementById("nomPiloteAvion").value,

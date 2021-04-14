@@ -2,6 +2,7 @@ import React, { useState, useReducer, useEffect } from "react";
 
 import Tableau from "../components/Planche/Tableau";
 import Controls from "../components/Planche/Form/Controls";
+import { useHttpClient } from "../hooks/http-hook";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -37,50 +38,34 @@ const Planche = (props) => {
   const [state, dispatch] = useReducer(reducer, "consultation");
   // SelectedLine va contenir un objet {volID:'..', ...} => juste 'id' de la ligne, comme MongoDB l'a crée
   const[selectedLine, setSelectedLine] = useState(null);
-  // TEmps de chargement des données
-  const[isLoading, setIsLoading] = useState(false);
   
+  const { isLoading, sendRequest } = useHttpClient();
+
   // loadedPlanche => Planche actuelle
   const [loadedPlanche, setLoadedPlanche] = useState();
 
   /**
    * Méthode pour ajouter une ligne à la base de donnée
+   * Est lancée par SubmitButton, dans Form, dans Tableau
    * @param {*} plancheID (au format Date dont heure, minute et seconde à 0)
    * @param {*} ligne
    */
-  const addLigne = (ligne) => {
-    //console.log("Planche à modifier "+plancheAAfficher.plancheID);
-    const plancheAModifier = DUMMY_DATA.find(
-      (planche) => loadedPlanche.plancheID.getTime() === plancheID.getTime()
-    );
-
+  const addLigne = async (ligne) => {
     // On part du principe qu'une planche existe déjà
-    if (plancheAModifier) {
-      const previousLen = plancheAModifier.data.length;
-
-      // L'id donné par SubmitButton est "-1", on lui donne donc un nouvel id qui n'existe pas encore
-      // basé sur la longueur de la planche du jour (indice donc part de 0, pas besoin de +1 puisque j'ai recupéré la length)
-      ligne.id = previousLen + "";
-
-      // On rajoute l'objet dans l'array "data" pour le moment => ça n'aura aucun effet (attendre le backend)
-      const newLen = plancheAModifier.data.push(ligne);
-
-      // TODO : intégration backend
-
-      if (newLen === !(previousLen + 1)) {
-        console.log("Pas normal, ligne mal insérée");
-      }
-    } else {
-      console.log(
-        "La planche dans laquelle vous souhaitez ajouter une ligne n'existe pas encore"
-      );
+    try{
+      await sendRequest('http://localhost:5000/api/planche/'+plancheIDsec+'/ligne', 'POST', 
+      JSON.stringify({
+      avion: ligne.avion,
+      planeur: ligne.planeur,
+      pilotePlaneur: ligne.pilotePlaneur,
+      placeArriere: ligne.placeArriere,
+      remorquage: ligne.remorquage,
+      atterrissage : ligne.atterrissage,
+      parachute : ligne.parachute
+    }));
+    } catch(err){
     }
-
-    console.log(
-      DUMMY_DATA.find(
-        (planche) => planche.plancheID.getTime() === plancheID.getTime()
-      )
-    );
+    // TODO : Refresh la page après ça
   };
   //this.addLigne = this.addLigne.bind(this);
 
@@ -159,31 +144,25 @@ const Planche = (props) => {
   // la liste étant vide, ne sera exécuté qu'une seule fois
   useEffect( () => { 
     // On crée un autre fonction pour ne pas faire un async/await sur useEffect
-    const sendRequest = async () => {
+    const getPlanche = async () => {
       try{
-        // Début de l'attente
-        setIsLoading(true);
         // On récupère notre planche/nos lignes
-      // Pas besoin de spécifier la methode 'POST' puisque c'est celle de base
-      const response = await fetch('http://localhost:5000/api/planche/'+plancheIDsec);
-
-      const responseData = await response.json();
-
-      setLoadedPlanche(responseData); // Reçoit un objet {plancheID, data:[...]}
+      // Pas besoin de spécifier la methode 'GET' puisque c'est celle de base
+      const responseData = await sendRequest('http://localhost:5000/api/planche/'+plancheIDsec);
+      
+      setLoadedPlanche(responseData);
       }catch (err){
       console.log('Impossible de récuperer la planche : '+err.message);
     }
-
-    setIsLoading(false);
-    } 
-    sendRequest();
-  }, []);
+    };
+    getPlanche();
+  }, [sendRequest, plancheIDsec]);
 
 
   // Pour ne pas afficher un tableau qui n'existe pas
-  if (!loadedPlanche || isLoading) {
+  if (!loadedPlanche || loadedPlanche.data.length < 1) { 
     return <h2>Il n'y a pas encore de ligne aujourd'hui.</h2>;
-  } else {
+  } else {  // Ici, on devrait se servir de isLoading
     // Je passe addLigne (méthode) au tableau, puis au form
     // this.addLigne et pas juste la méthode car on veut pouvoir modifier ce composant
     // on va donc bind
