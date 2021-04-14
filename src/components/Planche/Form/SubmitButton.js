@@ -44,7 +44,7 @@ const SubmitButton = (props) => {
       },
       parachute: document.getElementById("numeroParachute").value,
     };
-
+    
     //console.log(ligne.avion.immat, ligne.avion.pilote, ligne.avion.code);
 
     /* Puis on ajoute notre ligne à notre base de donnée.

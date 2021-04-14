@@ -38,6 +38,7 @@ export const useHttpClient = () => {
 
         // on donne les données
         // objet type {plancheID, data:[...]}
+        setIsLoading(false);
         return responseData;
       } catch (err) {
         console.log("Erreur lors de la réception des données : " + err);
@@ -53,5 +54,6 @@ export const useHttpClient = () => {
       activeHttpRequests.current.forEach((ctrl) => ctrl.abort());
     };
   }, []);
+
   return { isLoading, sendRequest };
 };
