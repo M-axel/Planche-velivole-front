@@ -32,8 +32,6 @@ const Planche = (props) => {
     window.alert("Trop de planches données en props");
   }
 
-  const DUMMY_DATA = []; // A supprimer
-
   // On utilise un etat : consultation, ajout ou modification
   const [state, dispatch] = useReducer(reducer, "consultation");
   // SelectedLine va contenir un objet {volID:'..', ...} => juste 'id' de la ligne, comme MongoDB l'a crée
@@ -136,17 +134,25 @@ const Planche = (props) => {
   };
   /********************** SUPPRESSION ***********************/
 
-  const supprimeLigne = () => {
+  const supprimeLigne = async () => {
     console.log("On supprime ligne id : " + selectedLine);
 
-    // ça parait inutile mais je veux etre certain de prendre à partir de DUMMY_DATA et pas plancheAAfficher
-    const planche = DUMMY_DATA[DUMMY_DATA.indexOf(loadedPlanche)];
-    const positionLigne = planche.data.indexOf(selectedLine);
-
-    planche.data.slice(positionLigne, positionLigne + 1);
-
-    // TODO : envoyer l'action au backend
-  };
+    if(selectedLine){
+      try {
+        await sendRequest(
+          "http://localhost:5000/api/planche/" + plancheIDsec + "/ligne",
+          "DELETE",
+          JSON.stringify({
+            id: selectedLine.id,
+          })
+        );
+      } catch (err) {
+        console.log("Impossible de supprimer la ligne : " + err.message);
+      }
+    } else {
+      console.log("Ligne n'est selectionnée pour le moment");
+    }
+    };
 
   /********************** AFFICHAGE ***********************/
 
